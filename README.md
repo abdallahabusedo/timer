@@ -13,7 +13,7 @@ $ git clone https://github.com/abdallahabusedo/timer.git
 ```
 2. **_Navigate to repository directory_**
 ```sh
-$ cd responsive-portfolio-website
+$ cd timer
 ```
 ### Running
 
