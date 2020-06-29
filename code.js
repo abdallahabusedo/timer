@@ -1,22 +1,39 @@
-function StopWatch(elem) {
-  let Time = 0;
-  let Interval;
-  let Offset;
+/* @@@@@@@    @@@@@@    @@@@@@   @@@  @@@@@@@    @@@@@@    @@@@@@   @@@  @@@      @@@@@@@   @@@@@@   @@@@@@@   @@@@@@@@
+   @@@@@@@@  @@@@@@@@  @@@@@@@   @@@  @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@ @@@     @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@@@@@@
+   @@!  @@@  @@!  @@@  !@@       @@!  @@!  @@@  @@!  @@@  @@!  @@@  @@!@!@@@     !@@       @@!  @@@  @@!  @@@  @@!
+   !@!  @!@  !@!  @!@  !@!       !@!  !@!  @!@  !@!  @!@  !@!  @!@  !@!!@!@!     !@!       !@!  @!@  !@!  @!@  !@!
+   @!@@!@!   @!@  !@!  !!@@!!    !!@  @!@  !@!  @!@  !@!  @!@  !@!  @!@ !!@!     !@!       @!@  !@!  @!@  !@!  @!!!:!
+   !!@!!!    !@!  !!!   !!@!!!   !!!  !@!  !!!  !@!  !!!  !@!  !!!  !@!  !!!     !!!       !@!  !!!  !@!  !!!  !!!!!:
+   !!:       !!:  !!!       !:!  !!:  !!:  !!!  !!:  !!!  !!:  !!!  !!:  !!!     :!!       !!:  !!!  !!:  !!!  !!:
+   :!:       :!:  !:!      !:!   :!:  :!:  !:!  :!:  !:!  :!:  !:!  :!:  !:!     :!:       :!:  !:!  :!:  !:!  :!:
+    ::       ::::: ::  :::: ::    ::   :::: ::  ::::: ::  ::::: ::   ::   ::      ::: :::  ::::: ::   :::: ::   :: ::::
+    :         : :  :   :: : :    :    :: :  :    : :  :    : :  :   ::    :       :: :: :   : :  :   :: :  :   : :: ::
+*/
+function Stopwatch(elem) {
+  let time = 0;
+  let offset;
+  let interval;
 
-  function Update() {
-    if (this.IsOn) {
-      Time += Delta();
+  function update() {
+    if (this.isOn) {
+      time += delta();
     }
-    elem.textContent = TimeFormatter(Time);
+
+    elem.textContent = timeFormatter(time);
   }
-  function Delta() {
+
+  function delta() {
     let now = Date.now();
-    let TimePassed = now - Offset;
-    Offset = now;
-    return TimePassed;
+    let timePassed = now - offset;
+
+    offset = now;
+
+    return timePassed;
   }
-  function TimeFormatter(times) {
-    time = new Date(times);
+
+  function timeFormatter(time) {
+    time = new Date(time);
+
     let minutes = time.getMinutes().toString();
     let seconds = time.getSeconds().toString();
     let milliseconds = time.getMilliseconds().toString();
@@ -36,20 +53,22 @@ function StopWatch(elem) {
     return minutes + ' : ' + seconds + ' . ' + milliseconds;
   }
 
-  this.Start = function () {
-    Interval = setInterval(update.bind(this), 10);
+  this.start = function () {
+    interval = setInterval(update.bind(this), 10);
     offset = Date.now();
-    this.IsON = true;
+    this.isOn = true;
   };
-  this.Reset = function () {
-    time = 0;
-    Update();
-  };
-  this.Stop = function () {
-    clearInterval(Interval);
-    Interval = null;
-    this.IsON = false;
-  };
-  this.IsON = false;
-}
 
+  this.stop = function () {
+    clearInterval(interval);
+    interval = null;
+    this.isOn = false;
+  };
+
+  this.reset = function () {
+    time = 0;
+    update();
+  };
+
+  this.isOn = false;
+}
