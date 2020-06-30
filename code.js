@@ -51,6 +51,7 @@ function Stopwatch(elem) {
   function delta() {
     /**
      * culc the now time
+     * The Date.now() method returns the number of milliseconds since January 1, 1970 00:00:00 UTC.
      */
     let now = Date.now();
     /**
@@ -75,6 +76,7 @@ function Stopwatch(elem) {
 
     /**
      * convert each one to string
+     * The getMinutes() method returns the minutes (from 0 to 59) of the specified date and time.
      */
     let minutes = time.getMinutes().toString();
     let seconds = time.getSeconds().toString();
@@ -107,6 +109,10 @@ function Stopwatch(elem) {
   this.start = function () {
     /**
      * set the interval and bind the update
+     The setInterval() method calls a function or evaluates an expression at specified intervals (in milliseconds).
+     The setInterval() method will continue calling the function until clearInterval() is called, or the window is closed.
+     The ID value returned by setInterval() is used as the parameter for the clearInterval() method.
+     setInterval(function, milliseconds, param1, param2, ...)
      */
     interval = setInterval(update.bind(this), 10);
     /**
